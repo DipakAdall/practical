@@ -78,3 +78,50 @@ MessageLoop(telegram_bot, action).run_as_thread()
 print ('Up and Running....')
 while 1:
     time.sleep(10)
+
+
+
+
+import time, datetime
+
+import telepot
+
+from telepot.loop import MessageLoop
+
+
+now = datetime.datetime.now()
+
+
+
+def action(msg):
+
+    chat_id = msg['chat']['id']
+
+    command = msg['text']
+
+
+    print ('Received: %s' % command)
+
+
+    if command == 'hi':
+
+        telegram_bot.sendMessage (chat_id, str("Hi! Sudesh, Junaid ,Pranay & Vishal"))
+
+    elif command == 'time':
+
+        telegram_bot.sendMessage(chat_id, str(now.hour)+str(":")+str(now.minute))
+
+    elif command == 'logo':
+
+        telegram_bot.sendPhoto (chat_id, photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Df4NYH7Fs7u0-H0a88cldwHaEc%26pid%3DApi&f=1&ipt=505f55ff5a7aa6e8f11944386b04a85b67a19917fa17464551f736b83d67ff9a&ipo=images")
+
+    elif command == 'file':
+        telegram_bot.sendDocument(chat_id, document=open('/home/pi/jsp.py'))
+    elif command == 'audio':
+        telegram_bot.sendAudio(chat_id, audio=open('/home/pi/test.mp3'))
+telegram_bot = telepot.Bot('6576199409:AAH552fu-0CRsvnLLC5BSb6bALHK49fjEfw')
+print (telegram_bot.getMe())
+MessageLoop(telegram_bot, action).run_as_thread()
+print ('Up and Running....')
+while 1:
+    time.sleep(10)
